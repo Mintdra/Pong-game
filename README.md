@@ -5,7 +5,7 @@ Just a normal pong game that we made just to learn on how to use unity and codin
 # Features
 in the menu screen you wil have an option to play with an ai and choosing it's difficulty or you can play against your friend. the multiplayer is not server but on ones own pc
 # How to get the game
-just go to itch.io to download the game
+just go to itch.io to download the game(it's not done yet but i will post the link here when im done)
 # improvment 
 we learn how to use unity a bit more and we're still exploring it and will soon be use to make an awasome game that we want to make
 # Credits 
