@@ -1,0 +1,81 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class Ballmovement : MonoBehaviour
+{
+    [SerializeField] private float startingspeed = 10;
+    [SerializeField] private float speedincrease = 0.5f;
+    [SerializeField] private Text player1score;
+    [SerializeField] private Text player2score;
+
+    private Rigidbody2D rb;
+    private int hitcounter;
+    // Start is called before the first frame update
+    void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        Invoke("Startball", 2f);
+    }
+
+    private void Startball()
+    {
+        rb.velocity = new Vector2 (-1 , 0) * (startingspeed + speedincrease * hitcounter);
+    }
+
+    private void Resetball()
+    {
+        rb.velocity = new Vector2(0, 0);
+        transform.position = new Vector2(0, 0);
+        hitcounter = 0;
+        Invoke("Startball", 2f);
+
+    }
+
+    private void Playerbounce(Transform myobject)
+    {
+        hitcounter++;
+
+        Vector2 Ballpo = transform.position;
+        Vector2 playerpos = myobject.position;
+
+        float xDirection, yDirection;
+        if (transform.position.x > 0)
+        {
+            xDirection = -1;
+        }
+        else
+        {
+            xDirection = -1;
+        }
+        yDirection = (Ballpo.y - playerpos.y) / myobject.GetComponent < Collider2D>().bounds.size.y;
+        if(yDirection == 0)
+        {
+            yDirection = 0.25f;
+        }
+        rb.velocity = new Vector2(xDirection, yDirection) * (startingspeed + (speedincrease * hitcounter));
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.name == "player1" || collision.gameObject.name == "player2")
+        {
+            Playerbounce(collision.transform);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(transform.position.x > 0)
+        {
+            Resetball();
+            player1score.text = (int.Parse(player1score.text) + 1).ToString();
+        }
+        else if (transform.position.x < 0)
+        {
+            Resetball();
+            player2score.text = (int.Parse(player2score.text) + 1).ToString();
+        }
+    }
+}
