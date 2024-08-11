@@ -1,0 +1,30 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class P2 : MonoBehaviour
+{
+    public float movespeed;
+    // Start is called before the first frame update
+    void Start()
+    {
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        bool isPressingup = Input.GetKey(KeyCode.UpArrow);
+        bool isPressingdown = Input.GetKey(KeyCode.DownArrow);
+
+        if (isPressingup)
+        {
+            transform.Translate(Vector2.up * Time.deltaTime * movespeed);
+        }
+
+        if (isPressingdown)
+        {
+            transform.Translate(Vector2.down * Time.deltaTime * movespeed);
+        }
+    }
+}
